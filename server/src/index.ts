@@ -6,7 +6,10 @@ const app = Express();
 const port = 8000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: "http://localhost:3000"
+}));
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
