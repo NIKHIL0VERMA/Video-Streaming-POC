@@ -53,7 +53,7 @@ app.post("/upload", upload.single("video"), (req, res) => {
 
   // in production ye to asyncronous hi krna hoga event loop block nhi krna pure server ka ;)
   // Koi fffmpeg acha comman btao bhai, production me to aac hoga or kya pta krna hoga
-  exec(`ffmpeg -i ${videoPath} -codec:v libx264 -codec:a aac -hls_time 10 -hls_playlist_type vod -hls_segment_filename "${outputPath}/part%02d.ts" -start_number 0 ${main}`, (error, stdout, stderr) => {
+  exec(`ffmpeg -i ${videoPath} -codec:v libx264 -profile:v baseline -level 3.0 -codec:a aac -hls_time 10 -hls_playlist_type vod -hls_segment_filename "${outputPath}/part%02d.ts" -start_number 0 ${main}`, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error processing video: ${error.message}`);
       return res.status(500).json({ error: "Error processing video" });
